@@ -9,12 +9,15 @@ const App = () => {
     console.log('Log In button clicked', event.target)
     const loginInfoObject = {
       username: newUsername,
-      // password: newPassword,
+      password: newPassword
       // hashed 
       // dateTime: currentDateTime
     }
     console.log(JSON.stringify(loginInfoObject))
     // success message
+
+    setNewUsername('')
+    setNewPassword('')
 }
 
   const [ newUsername, setNewUsername ] = useState('')
@@ -23,11 +26,19 @@ const App = () => {
     setNewUsername(event.target.value)
   }
 
+  const [ newPassword, setNewPassword ] = useState('')
+  const handlePasswordChange = (event) => {
+    console.log(event.target.value)
+    setNewPassword(event.target.value)
+  }
+
   return (
     <div>
       <h4>Login</h4>
       <div>Welcome back!</div>
-      <form>
+      <form 
+        name='loginForm'
+        onSubmit={checkLoginInfo}>
         <br/>
         <div>
           Username <input 
@@ -43,10 +54,21 @@ const App = () => {
           Password <input 
             name='password' 
             placeholder='Password' 
+            value={newPassword}
+            onChange={handlePasswordChange}
             required>
           </input>
         </div>
         <br/>
+        <div>
+        <button 
+          type='submit' 
+          value='submit' 
+          // disabled={!formValid}
+          >
+            Submit
+          </button>
+        </div>
       </form>
       <div>Reset password</div>
     </div>
